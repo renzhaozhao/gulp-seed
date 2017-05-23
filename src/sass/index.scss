@@ -1,0 +1,9 @@
+@import 'libs/config';
+
+body {
+  background: $blue;
+  transform: scale(1);
+  transition: 1s;
+  box-shadow: 0 0 5px #ccc;
+  color: $red;
+}

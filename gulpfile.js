@@ -1,0 +1,56 @@
+const gulp = require('gulp')
+const sass = require('gulp-sass')
+const autoprefixer = require('gulp-autoprefixer')
+const cleanCSS = require('gulp-clean-css')
+const babel = require('gulp-babel')
+const sourcemaps = require('gulp-sourcemaps')
+const uglify = require('gulp-uglify')
+
+const connect = require('gulp-connect')
+
+gulp.task('html', function () {
+  gulp.src('./src/*.html')
+    .pipe(gulp.dest('./public'))
+    .pipe(connect.reload());
+})
+
+gulp.task('js', () => {
+  gulp.src('./src/js/**/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(babel())
+    .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./public/js'))
+    .pipe(connect.reload())
+})
+
+gulp.task('sass', () => (
+  gulp.src('./src/sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(gulp.dest('./public/css'))
+    .pipe(connect.reload())
+))
+
+gulp.task('watch', () => {
+  gulp.watch('./src/js/**/*.js', ['js'])
+  gulp.watch('./src/sass/**/*.scss', ['sass'])
+  gulp.watch('./src/*.html', ['html'])
+})
+
+gulp.task('init', ['sass', 'js', 'html']);
+
+gulp.task('server', () => {
+  connect.server({
+    root: 'public',
+    livereload: true,
+    port: 8888
+  });
+})
+
+gulp.task('default', ['server', 'watch'])
+
