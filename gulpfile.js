@@ -5,8 +5,12 @@ const cleanCSS = require('gulp-clean-css')
 const babel = require('gulp-babel')
 const sourcemaps = require('gulp-sourcemaps')
 const uglify = require('gulp-uglify')
+const gutil = require("gulp-util");
+const through = require("through2");
 
 const connect = require('gulp-connect')
+
+const copyright = require('./package.json').copyright
 
 gulp.task('html', function () {
   gulp.src('./src/*.html')
@@ -20,6 +24,7 @@ gulp.task('js', () => {
     .pipe(babel())
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
+    .pipe(ac())
     .pipe(gulp.dest('./public/js'))
     .pipe(connect.reload())
 })
@@ -53,4 +58,19 @@ gulp.task('server', () => {
 })
 
 gulp.task('default', ['server', 'watch'])
+
+function ac() {
+  var stream = through.obj(function (file, enc, cb) {
+    if (file.isBuffer()) {
+      file.contents = new Buffer(copyright + file.contents.toString())
+      this.push(file);
+      return cb();
+    }
+    else {
+      gutil.log(gutil.colors.cyan('warning:'), "there's something wrong with the file");
+    }
+    return cb();
+  });
+  return stream;
+}
 
