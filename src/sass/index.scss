@@ -1,9 +1,34 @@
 @import 'libs/config';
 
 body {
-  background: $blue;
-  transform: scale(1);
-  transition: 1s;
-  box-shadow: 0 0 5px #ccc;
+  background: $bgColor;
   color: $red;
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+  box-shadow: 0 0 10px lightseagreen;
+  text-align: center;
+  transform: translate(-50%,-50%);
+  position: absolute;
+  background-image: linear-gradient(to bottom,lightblue,white);
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  line-height: 200px;
+  transition: .5s;
+  //animation: zhuan 2s linear infinite;
+}
+
+@keyframes zhuan{
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

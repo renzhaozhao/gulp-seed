@@ -23,8 +23,8 @@ gulp.task('js', () => {
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(uglify())
-    .pipe(sourcemaps.write('.'))
     .pipe(ac())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./public/js'))
     .pipe(connect.reload())
 })
@@ -37,6 +37,7 @@ gulp.task('sass', () => (
       cascade: false
     }))
     .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(ac())
     .pipe(gulp.dest('./public/css'))
     .pipe(connect.reload())
 ))
