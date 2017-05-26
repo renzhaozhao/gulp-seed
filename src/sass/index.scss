@@ -1,11 +1,14 @@
 @import 'helper/config';
 
+@import 'components/button';
+
 body {
-  background: $bgColor;
-  color: $red;
+  background: lightblue;
+  color: red;
   margin: 0;
   padding: 0;
   background: #34393f;
+  text-align: center;
 }
 
 .box {
@@ -13,7 +16,7 @@ body {
   height: 200px;
   box-shadow: 0 0 10px lightseagreen;
   text-align: center;
-  transform: translate(-50%,-50%);
+  transform: rotate(0deg) translate(-50%,-50%);
   position: absolute;
   background-image: linear-gradient(to bottom,lightblue,white);
   left: 50%;
@@ -21,22 +24,19 @@ body {
   border-radius: 50%;
   line-height: 200px;
   transition: .5s;
-
-  &:hover {
-    transform: scale(1.2);
-  }
   //animation: zhuan 2s linear infinite;
 }
 
 @keyframes zhuan{
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg) translate(-50%,-50%);
   }
 
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg) translate(-50%,-50%);
   }
 }
+
 h2 {
   color: #D1393B;
   font-size: 30px;
@@ -48,7 +48,7 @@ h2 {
   position: relative;
   width: 131px;
   height: 85px;
-  margin: 100px auto;
+  margin: 10px auto;
 
   p {
     position: absolute;

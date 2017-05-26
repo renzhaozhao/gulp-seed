@@ -1,0 +1,32 @@
+@mixin generate-button($name, $background, $border-color,$color) {
+  .button-#{$name} {
+    background: $background;
+    color: $color;
+    border-color: $border-color;
+
+    &:hover {
+      background: lighten($background, 5%);
+    }
+  }
+}
+
+.button {
+  border: solid 1px $color-border;
+  border-radius: 4px;
+  display: inline-block;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 28px;
+  padding: 0 15px;
+  font-size: 12px;
+  height: 28px;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 10px;
+  transition: all .3s cubic-bezier(.645,.045,.355,1);
+}
+
+@include generate-button('primary', $color-primary, $color-primary, white);
+@include generate-button('danger', $color-danger, $color-danger, white);
+
+
