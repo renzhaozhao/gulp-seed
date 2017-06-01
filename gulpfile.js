@@ -18,6 +18,11 @@ gulp.task('html', function () {
     .pipe(connect.reload());
 })
 
+gulp.task('img', function () {
+  gulp.src('./src/img/*')
+    .pipe(gulp.dest('./public/img'))
+})
+
 gulp.task('js', () => {
   gulp.src('./src/js/**/*.js')
     .pipe(sourcemaps.init())
@@ -46,9 +51,10 @@ gulp.task('watch', () => {
   gulp.watch('./src/js/**/*.js', ['js'])
   gulp.watch('./src/sass/**/*.scss', ['sass'])
   gulp.watch('./src/*.html', ['html'])
+  gulp.watch('./src/*', ['img'])
 })
 
-gulp.task('init', ['sass', 'js', 'html']);
+gulp.task('init', ['sass', 'js', 'html', 'img']);
 
 gulp.task('server', () => {
   connect.server({
