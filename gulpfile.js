@@ -3,6 +3,7 @@ const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
 const cleanCSS = require('gulp-clean-css')
 const babel = require('gulp-babel')
+const plumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 const uglify = require('gulp-uglify')
 const gutil = require("gulp-util");
@@ -26,6 +27,7 @@ gulp.task('img', function () {
 gulp.task('js', () => {
   gulp.src('./src/js/**/*.js')
     .pipe(sourcemaps.init())
+    .pipe(plumber())
     .pipe(babel())
     .pipe(uglify())
     .pipe(ac())
