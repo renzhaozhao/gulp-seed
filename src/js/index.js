@@ -1,42 +1,21 @@
-const data = {
-    limit: 10,
-    a: 'aa',
-    s: 'ss',
-    b: 'bb',
-    1: '1',
-    11: '11',
-    2: '2',
-    0: 0,
-    haha: null
+var width = $('#slider').width();
+
+var clone = $('.content li').clone();
+$('.content').append(clone);
+var len = $('.nav li').length;
+
+$('.content').css({ width: width * len })
+
+
+$('.nav li').click(function () {
+  var index = $('.nav li').index(this);
+  action(index);
+})
+
+action(0);
+
+function action(index) {
+  var leftwidth = -index * width;
+  $('.content').stop(true, false).animate({ left: leftwidth }, 500);
+  $('.nav li').eq(index).addClass('active').siblings().removeClass('active');
 }
-
-function sortObjString(obj) {
-    if (!Object.keys) {
-        Object.keys = function (obj) {
-            var keys = [];
-
-            for (var i in obj) {
-                if (obj.hasOwnProperty(i)) {
-                    keys.push(i);
-                }
-            }
-
-            return keys;
-        };
-    }
-    var newKey = Object.keys(obj).sort();
-    var newObj = {};
-    var str = '';
-    for (var i = 0; i < newKey.length; i++) {
-        newObj[newKey[i]] = obj[newKey[i]]
-    }
-    for (var key in newObj) {
-        if (!!newObj[key] || newObj[key] === 0) {
-            str += newObj[key]
-        }
-    }
-    return str;
-}
-
-var res = sortObjString(data)
-console.log(res)

@@ -2,6 +2,15 @@
 
 @import 'components/button';
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 body {
   background: lightblue;
   color: red;
@@ -11,66 +20,48 @@ body {
   text-align: center;
 }
 
-.box {
-  width: 200px;
-  height: 200px;
-  box-shadow: 0 0 10px lightseagreen;
-  text-align: center;
-  transform: rotate(0deg) translate(-50%,-50%);
-  position: absolute;
-  background-image: linear-gradient(to bottom,lightblue,white);
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  line-height: 200px;
-  transition: .5s;
-  //animation: zhuan 2s linear infinite;
+.container {
+  width: 770px;
+  margin: 0 auto;
 }
 
-@keyframes zhuan{
-  from {
-    transform: rotate(0deg) translate(-50%,-50%);
-  }
-
-  to {
-    transform: rotate(360deg) translate(-50%,-50%);
-  }
-}
-
-h2 {
-  color: #D1393B;
-  font-size: 30px;
-  text-align: center;
-}
-
-.test {
-  overflow: hidden;
+#slider {
   position: relative;
-  width: 131px;
-  height: 85px;
-  margin: 10px auto;
+  width: 770px;
+  height: 350px;
+  overflow: hidden;
 
-  p {
+  .content {
+   position: absolute;
+   left: 0;
+   height: 350px;
+   z-index: 1;
+
+    li {
+      float: left;
+    }
+  }
+
+  .nav {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 17px;
-    line-height: 17px;
-    background: rgba(0,0,0,.5);
-    text-align: center;
-    margin: 0;
-    font-size: 12px;
-  }
+    left: 50%;
+    bottom: 10px;
+    transform: translate(-50%,0);
+    z-index: 2;
 
-  img {
-    transition: .3s;
-    backface-visibility: hidden;
-  }
+    li {
+      width: 12px;
+      height: 12px;
+      background-color: #4c4c4c;
+      border-radius: 50%;
+      float: left;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: .3s;
 
-  &:hover {
-    img {
-      transform: scale(1.2);
+      &.active {
+        background-color: #14b9d6;
+      }
     }
   }
 }
